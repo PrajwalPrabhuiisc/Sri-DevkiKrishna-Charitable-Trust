@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sri DevkiKrishna Charitable Trust</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a237e;
+      --secondary: #ff6e40;
+      --light: #f5f5f5;
+      --dark: #121212;
+      --text: #333;
+      --gradient: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background: transparent;
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+
+    .navbar.scrolled {
+      background: var(--dark);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--secondary);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url('Images/WhatsApp Image 2025-02-14 at 16.46.16.jpeg') center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      background-attachment: fixed; /* Parallax effect */
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(transparent, var(--light));
+      z-index: 1;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero-content p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+      background: var(--secondary);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      background: #ff8a65;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section {
+      padding: 6rem 2rem;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-icon i {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .events {
+      background: var(--gradient);
+      color: white;
+    }
+
+    .event-slider {
+      display: flex;
+      overflow-x: auto;
+      gap: 2rem;
+      padding: 2rem 0;
+      scroll-snap-type: x mandatory;
+    }
+
+    .event-card {
+      min-width: 300px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 15px;
+      scroll-snap-align: start;
+    }
+
+    .donation-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .donation-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .donation-amount {
+      font-size: 2rem;
+      color: var(--primary);
+      margin: 1rem 0;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      aspect-ratio: 1;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .section {
+        padding: 4rem 1rem;
+      }
+
+      .feature-card {
+        margin-bottom: 1rem;
+      }
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 4rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-links h3 {
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--secondary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Main content structure -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="#" class="logo">Sri DevkiKrishna Charitable Trust</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#events">Events</a>
+        <a href="#donate">Donate</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Experience Divine Serenity</h1>
+      <p>Join our spiritual community and discover inner peace through ancient wisdom and modern practices</p>
+      <a href="#services" class="cta-button">Explore Services</a>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-om"></i>
+          </div>
+          <h3>Daily Rituals</h3>
+          <p>Experience traditional ceremonies performed by our experienced priests</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3>Community Service</h3>
+          <p>Join our initiatives to serve the community and spread spiritual awareness</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-book-reader"></i>
+          </div>
+          <h3>Spiritual Education</h3>
+          <p>Learn ancient scriptures and philosophy through modern teaching methods</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="events" class="section events">
+    <div class="container">
+      <h2>Upcoming Events</h2>
+      <div class="event-slider">
+        <div class="event-card">
+          <h3>Monthly Full Moon Meditation</h3>
+          <p>Date: Every Pournami</p>
+          <p>Time: 7:00 PM - 9:00 PM</p>
+        </div>
+        <div class="event-card">
+          <h3>Youth Spiritual Retreat</h3>
+          <p>Date: First Sunday of every month</p>
+          <p>Time: 9:00 AM - 4:00 PM</p>
+        </div>
+        <div class="event-card">
+          <h3>Annual Temple Festival</h3>
+          <p>Date: July 15-21, 2025</p>
+          <p>Seven days of celebrations</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="donate" class="section">
+    <div class="container">
+      <h2>Support Our Temple</h2>
+      <div class="donation-options">
+        <div class="donation-card">
+          <h3>Monthly Pooja</h3>
+          <div class="donation-amount">₹1,116</div>
+          <p>Support regular temple ceremonies</p>
+          <a href="#" class="cta-button">Donate Now</a>
+        </div>
+        <div class="donation-card">
+          <h3>Annadanam</h3>
+          <div class="donation-amount">₹5,116</div>
+          <p>Sponsor meals for devotees</p>
+          <a href="#" class="cta-button">Donate Now</a>
+        </div>
+        <div class="donation-card">
+          <h3>Temple Development</h3>
+          <div class="donation-amount">₹11,116</div>
+          <p>Support infrastructure improvements</p>
+          <a href="#" class="cta-button">Donate Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="section">
+    <div class="container">
+      <h2>Temple Gallery</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="Images/WhatsApp Image 2025-02-14 at 16.46.10.jpeg" alt="Temple Front View">
+        </div>
+        <div class="gallery-item">
+          <img src="Images/WhatsApp Image 2025-02-14 at 16.46.11 (1).jpeg" alt="Main Shrine">
+        </div>
+        <div class="gallery-item">
+          <img src="Images/WhatsApp Image 2025-02-14 at 16.46.11.jpeg" alt="Festival Celebration">
+        </div>
+        <div class="gallery-item">
+            <img src="Images/WhatsApp Image 2025-02-14 at 16.46.12.jpeg" alt="Temple Architecture">
+        </div>
+        <div class="gallery-item">
+            <img src="Images/WhatsApp Image 2025-02-14 at 16.46.13 (1).jpeg" alt="Temple Architecture">
+        </div>
+        <div class="gallery-item">
+            <img src="Images/WhatsApp Image 2025-02-14 at 16.46.13.jpeg" alt="Temple Architecture">
+        </div>
+        <div class="gallery-item">
+            <img src="Images/WhatsApp Image 2025-02-14 at 16.46.14.jpeg" alt="Temple Architecture">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-form">
+        <h2>Get in Touch</h2>
+        <form>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" required>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="5" required></textarea>
+          </div>
+          <button type="submit" class="cta-button">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#donate">Donate</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Temple Timings</h3>
+          <ul>
+            <li>Morning: 5:30 AM - 12:00 PM</li>
+            <li>Evening: 4:00 PM - 9:00 PM</li>
+            <li>Special Pooja: By Appointment</li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Contact Info</h3>
+          <ul>
+            <li>123 Temple Street</li>
+            <li>Chennai, Tamil Nadu</li>
+            <li>Phone: +91 123 456 7890</li>
+            <li>Email: info@sritemple.com</li>
+          </ul>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar color change on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    window.addEventListener('load', () => {
+      const hero = document.querySelector('.hero');
+      const preloader = document.querySelector('.hero-preloader');
+      
+      // Create a new image object to ensure the background image is loaded
+      const img = new Image();
+      img.src = 'Images/hero-background.jpg';
+      
+      img.onload = () => {
+        hero.classList.add('loaded');
+        if(preloader) preloader.classList.add('hidden');
+      };
+    });
+  </script>
+</body>
+</html>
